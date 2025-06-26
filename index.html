@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PitchBuddy – AI Sales Assistant</title>
+
+  <!-- Firebase -->
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script defer src="firebase-init.js"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body.dark { background-color: #111827; color: #fff; }
+    .dark .bg-white { background-color: #1f2937 !important; }
+    .dark .text-gray-900 { color: #f3f4f6 !important; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+    <h1 class="text-xl font-bold text-blue-700">PitchBuddy</h1>
+    <div class="flex items-center gap-4">
+      <button id="darkToggle" class="text-sm">🌙</button>
+      <span id="userEmail" class="text-sm"></span>
+      <button id="signInBtn" onclick="signIn()" class="bg-blue-600 text-white px-4 py-2 rounded">Sign in</button>
+      <button id="signOutBtn" onclick="signOut()" class="hidden bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="app" class="p-6 hidden">
+    <h2 class="text-2xl font-semibold mb-4">Welcome to PitchBuddy 👋</h2>
+
+    <label for="aiEngine" class="block mb-2 text-sm font-medium">Choose AI Engine</label>
+    <select id="aiEngine" class="w-full mb-4 p-2 border rounded">
+      <option>ChatGPT (OpenAI)</option>
+      <option>Google Gemini</option>
+      <option>Microsoft Copilot</option>
+    </select>
+
+    <div id="chatBox" class="p-4 bg-white rounded shadow mb-4 h-64 overflow-y-auto">
+      <p class="text-sm text-gray-500">Start typing an objection below...</p>
+    </div>
+
+    <input id="userInput" type="text" placeholder="Ask a question or enter an objection..." class="w-full mb-2 p-2 border rounded"/>
+    <button onclick="getAIResponse()" class="w-full bg-blue-600 text-white py-2 rounded">Get AI Response</button>
+  </main>
+
+  <!-- App Script -->
+  <script src="script.js"></script>
+</body>
+</html>
