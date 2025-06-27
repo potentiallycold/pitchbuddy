@@ -1,15 +1,9 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PitchBuddy – AI Sales Assistant</title>
-
-  <!-- Firebase -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script defer src="firebase-init.js"></script>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,11 +12,16 @@
     .dark .bg-white { background-color: #1f2937 !important; }
     .dark .text-gray-900 { color: #f3f4f6 !important; }
   </style>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="firebase-init.js"></script>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white transition-all duration-300">
 
   <!-- Header -->
-  <header class="p-4 bg-white shadow flex justify-between items-center">
+  <header class="p-4 bg-white dark:bg-gray-800 shadow flex justify-between items-center">
     <h1 class="text-xl font-bold text-blue-700">PitchBuddy</h1>
     <div class="flex items-center gap-4">
       <button id="darkToggle" class="text-sm">🌙</button>
@@ -33,25 +32,23 @@
   </header>
 
   <!-- Main -->
-  <main id="app" class="p-6 hidden">
+  <main id="app" class="p-6 hidden flex-grow">
     <h2 class="text-2xl font-semibold mb-4">Welcome to PitchBuddy 👋</h2>
 
     <label for="aiEngine" class="block mb-2 text-sm font-medium">Choose AI Engine</label>
-    <select id="aiEngine" class="w-full mb-4 p-2 border rounded">
+    <select id="aiEngine" class="w-full mb-4 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
       <option>ChatGPT (OpenAI)</option>
       <option>Google Gemini</option>
       <option>Microsoft Copilot</option>
     </select>
 
-    <div id="chatBox" class="p-4 bg-white rounded shadow mb-4 h-64 overflow-y-auto">
-      <p class="text-sm text-gray-500">Start typing an objection below...</p>
-    </div>
+    <div id="chatBox" class="p-4 bg-white dark:bg-gray-800 rounded shadow mb-4 h-64 overflow-y-auto text-sm"></div>
 
-    <input id="userInput" type="text" placeholder="Ask a question or enter an objection..." class="w-full mb-2 p-2 border rounded"/>
+    <input id="userInput" type="text" placeholder="Ask a question or enter an objection..." class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" />
     <button onclick="getAIResponse()" class="w-full bg-blue-600 text-white py-2 rounded">Get AI Response</button>
   </main>
 
-  <!-- App Script -->
+  <!-- Script runs after Firebase is ready -->
   <script src="script.js"></script>
 </body>
 </html>
