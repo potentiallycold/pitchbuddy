@@ -5,6 +5,7 @@ const chatBox = document.getElementById("chatBox");
 const userInput = document.getElementById("userInput");
 const app = document.getElementById("app");
 
+// Auth state handling
 auth.onAuthStateChanged(user => {
   if (user) {
     document.getElementById("userEmail").innerText = user.email;
@@ -19,19 +20,24 @@ auth.onAuthStateChanged(user => {
   }
 });
 
+// Sign-in function
 function signIn() {
   const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
   auth.signInWithPopup(provider).catch(err => alert(err.message));
 }
 
+// Sign-out function
 function signOut() {
   auth.signOut().catch(err => alert(err.message));
 }
 
+// Toggle dark mode
 document.getElementById("darkToggle").addEventListener("click", () => {
   document.body.classList.toggle("dark");
 });
 
+// Send input to AI engine
 function getAIResponse() {
   const ai = document.getElementById("aiEngine").value;
   const input = userInput.value.trim();
@@ -44,7 +50,7 @@ function getAIResponse() {
     fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: "Bearer sk-proj-XXXX", // Replace with your actual key
+        Authorization: "Bearer sk-proj-XXXX", // Replace with your key
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -81,6 +87,6 @@ function getAIResponse() {
     });
 
   } else {
-    chatBox.innerHTML += `<p><strong>AI:</strong> Copilot API integration coming soon.</p>`;
+    chatBox.innerHTML += `<p><strong>AI:</strong> Copilot support coming soon.</p>`;
   }
 }
